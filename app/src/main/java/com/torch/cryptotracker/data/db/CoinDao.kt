@@ -15,6 +15,7 @@ interface CoinDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(coins: List<CoinEntity>)
 
+
     @Query("DELETE FROM coins")
     suspend fun clearAll()
 }

@@ -6,20 +6,22 @@ import com.torch.cryptotracker.data.db.CoinDao
 import com.torch.cryptotracker.data.db.CoinDatabase
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dagger.hilt.testing.TestInstallIn
 
 @Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
+@TestInstallIn(
+    components = [SingletonComponent::class],
+    replaces = [AppModule::class]
+)
+object TestAppModule {
 
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): CoinDatabase {
-        return Room.databaseBuilder(
+        return Room.inMemoryDatabaseBuilder(
             context,
             CoinDatabase::class.java,
-            "coin_database"
         ).build()
     }
 

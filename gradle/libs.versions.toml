@@ -15,9 +15,12 @@ room = "2.7.1"
 androidxHilt = "1.2.0"
 navigationCompose = "2.9.0"
 glideCompose = "1.0.0-beta01"
+workRuntimeKtx = "2.10.1"
+runner = "1.6.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -30,6 +33,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 # Retrofit
@@ -43,7 +47,8 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 # Hilt (DI)
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 
 # Navigation
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHilt" }
@@ -51,6 +56,8 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 
 # Glide
 glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glideCompose" }
+
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

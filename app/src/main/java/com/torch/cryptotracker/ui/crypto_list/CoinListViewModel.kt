@@ -7,7 +7,7 @@ import com.torch.cryptotracker.domain.repository.CoinRepository
 import com.torch.cryptotracker.domain.repository.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -18,8 +18,8 @@ class CoinListViewModel @Inject constructor(
     private val coinRepository: CoinRepository
 ) : ViewModel() {
 
-    private val _coins = MutableStateFlow(CoinListState())
-    val coins: StateFlow<CoinListState> = _coins
+    private val _uiState = MutableStateFlow(CoinListState())
+    val uiState = _uiState.asStateFlow()
 
     init {
         fetchCoins()
@@ -30,15 +30,15 @@ class CoinListViewModel @Inject constructor(
         coinRepository.getCoins().onEach { resource ->
             when (resource) {
                 is Resource.Loading -> {
-                    _coins.update { it.copy(isLoading = true) }
+                    _uiState.update { it.copy(isLoading = true) }
                 }
 
                 is Resource.Error -> {
-                    _coins.update { it.copy(error = resource.message) }
+                    _uiState.update { it.copy(error = resource.message) }
                 }
 
                 is Resource.Success<*> -> {
-                    _coins.update { it.copy(coins = resource.data as? List<Coin> ?: emptyList()) }
+                    _uiState.update { it.copy(coins = resource.data as? List<Coin> ?: emptyList()) }
                 }
             }
         }.launchIn(viewModelScope)

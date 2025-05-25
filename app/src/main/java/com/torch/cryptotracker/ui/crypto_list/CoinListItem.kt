@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
@@ -23,24 +24,33 @@ fun CoinListItem(modifier: Modifier = Modifier, coin: Coin) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Row {
-                GlideImage(
-                    model = coin.imageUrl,
-                    contentDescription = coin.name,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .padding(end = 8.dp)
-                )
+        Row(modifier = Modifier.padding(8.dp)) {
+            GlideImage(
+                model = coin.imageUrl,
+                contentDescription = coin.name,
+                modifier = Modifier
+                    .size(64.dp)
+                    .padding(end = 8.dp)
+            )
+            Column {
+                Row {
+                    Text(
+                        coin.name,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Text(
+                        "(${coin.symbol})",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.Gray
+                    )
+                }
                 Text(
-                    coin.name,
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Text(
-                    coin.symbol,
-                    style = MaterialTheme.typography.labelMedium
+                    "$${coin.currentPrice}",
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
+
         }
+
     }
 }
